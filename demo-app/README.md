@@ -1,28 +1,22 @@
-# Feedbacky
+# My E-Commerce App
 
 ## About Project
-This is a component library for e-commerce web sites.
 
-
+This is a demo e-commerce app (In order to prove the concept of feedbacky).
 
 <br/>
 
-
-<img src="./assets/feedbacky.PNG" width="600" height="400">
-
+<img src="./assets/my-app.png" width="600" height="400">
 
 <br/>
 
 This document (prod) will be completed as soon as possible,
 
-
-
-🧪 100% component coverage <br>
-✔️ Rollup bundled succesfully (just 34kB !) <br>
 ✔️ e2e tests with cypress in demo-app <br>
+✔️ Rollup bundled succesfully (just 34kB !) (for feedbacky component) <br>
 ✔️ Online Demo: https://feedbacky-page.vercel.app/ <br>
 ✔️ Storybook: https://feedbacky-story.vercel.app/ <br>
-✔️ e2e tests with cypress in demo-app <br>
+✔️ e2e tests with cypress <br>
 ✔️ spreadsheet as a db https://docs.google.com/spreadsheets/d/1P8H5ELZYyeVkw7DltKO_alb6RqBomTHLlwyYw-dVQfQ/edit#gid=0
 
 ## Dependencies
@@ -35,33 +29,42 @@ To install required packages via NPM
 
 In the component project directory, you can run:
 
-For unit tests:
+## For unit tests:
 
-
-### `npm test`
+### `npm run test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://jestjs.io/) for more information.
+
 (you can find coverage report in "coverage" dist in folder)
+
 in package json:
+
 ```js
  "scripts": {
       ...
        ...
-    "test": "jest --watchAll --coverage", 
+    "test": "jest --watchAll --coverage",
         ...
   },
 ```
-### `npm run rollup`
 
-Rollup is a module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application. It uses the standardized ES module format for code, instead of previous idiosyncratic solutions such as CommonJS and AMD. ES modules let you freely and seamlessly combine the most useful individual functions from your favorite libraries. Rollup can optimize ES modules for faster native loading in modern browsers, or output a legacy module format allowing ES module workflows today.
+## For e2e test:
 
-in package json :
+### `npm run cypress `
+
+Launches the test runner in the interactive watch mode.\
+Fast, easy and reliable testing for anything that runs in a browser.
+[cypress](https://github.com/cypress-io/cypress)
+
+in package json:
+
 ```js
  "scripts": {
       ...
        ...
-    "rollup": "rollup -c", //You find rollup configurations in rollup.config.js
+        "cypress": "cypress open",
+          "cypress:run": "cypress run cy:run -- --record --spec './cypress/e2e/spec.cy.js'"
         ...
   },
 ```
@@ -105,7 +108,11 @@ export default function App() {
   return (
     <>
       <FeedbackButton {...feedbackButtonOptions} onClick={open} />
-      <FeedbackDialog {...feedbackDialogOptions} isOpen={isOpen} handleClose={close} />
+      <FeedbackDialog
+        {...feedbackDialogOptions}
+        isOpen={isOpen}
+        handleClose={close}
+      />
     </>
   );
 }
@@ -135,7 +142,7 @@ Sets the component where `<FeedbackDialog> and <FeedbackButton> `s will be rende
 |                 |                    |         |                                          |     |
 
 - **FeedbackDialog Props**
-<br />
+  <br />
 
 <table>
   <tr>
@@ -271,48 +278,49 @@ Sets the component where `<FeedbackDialog> and <FeedbackButton> `s will be rende
 </tr>
  	</tr>
 
-
 </table>
 
 _Example:_
 
 ```js
- import {Feedbacky} from ".."
+import { Feedbacky } from "..";
 export default function App() {
-   const buttonOptions:CommonButtonProp={
+  const buttonOptions: CommonButtonProp = {
     text: "Feed Me!",
     variant: "primary",
     size: "large",
-    shape: "Pill"
-  }
-  const dilaogOptions:FeedbackDialogType={
+    shape: "Pill",
+  };
+  const dilaogOptions: FeedbackDialogType = {
     ///////////// DEFAULTS \\\\\\\\\\\\\\\\\\\\
     //submit button options
-    submitButtonShape:"Pill",
-    submitButtonText:"Submit",
-    submitButtonVariant:"orange",
-    submitButtonSize:"large",
+    submitButtonShape: "Pill",
+    submitButtonText: "Submit",
+    submitButtonVariant: "orange",
+    submitButtonSize: "large",
     //header options
-    headerText:"Feedback Dialog",
-    headerSize:"medium",
-    headerVariant:"white",
+    headerText: "Feedback Dialog",
+    headerSize: "medium",
+    headerVariant: "white",
     //message box  option
-    messageFontSize:"medium",
-    messageMaxLenght:2000,
+    messageFontSize: "medium",
+    messageMaxLenght: 2000,
     //opacity
-    opacity:"0.5",
-    dbURL:"https://sheetdb.io/api/v1/d4iorc1s9betr", // your google sheet api etc. url i used sheet db
-    succesMsg:"We have got your feedback!", //if your feedback will be sent by successfully , show this message
+    opacity: "0.5",
+    dbURL: "https://sheetdb.io/api/v1/d4iorc1s9betr", // your google sheet api etc. url i used sheet db
+    succesMsg: "We have got your feedback!", //if your feedback will be sent by successfully , show this message
     // Has init init value ==> valid "We got your feedback!"
-    errorMsg:"Error has been occurred!", //if your feedback  couldn't be sent, show this err message
+    errorMsg: "Error has been occurred!", //if your feedback  couldn't be sent, show this err message
     // Has init init value ==> valid "Error has been occurred!"
-  }
+  };
   return (
     <>
       <Layout />
-      <Feedbacky feedbackyDialog={dilaogOptions} feedbackyButton={buttonOptions}/>
+      <Feedbacky
+        feedbackyDialog={dilaogOptions}
+        feedbackyButton={buttonOptions}
+      />
     </>
-  )
+  );
 }
 ```
-
